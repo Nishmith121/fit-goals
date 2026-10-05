@@ -1,0 +1,136 @@
+/* ---------- PillNav Component Styles ---------- */
+.pill-nav-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.45rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65), 0 0 20px rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  pointer-events: auto;
+  user-select: none;
+  z-index: 100;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pill-nav-container:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+/* Brand Logo */
+.pill-nav-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 0.2rem;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.25s ease;
+}
+
+.pill-nav-logo-wrap:hover {
+  transform: scale(1.08);
+}
+
+.pill-nav-logo-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Items Track */
+.pill-nav-items-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+/* Sliding Pill Highlight */
+.pill-indicator-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  will-change: transform, width, height;
+}
+
+/* Nav Links */
+.pill-nav-link {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.65);
+  transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  outline: none;
+}
+
+.pill-nav-link:hover {
+  color: var(--hovered-text-color, #ffffff);
+}
+
+.pill-nav-link.is-active,
+.pill-nav-link.is-hovered {
+  color: var(--pill-text-color, #000000) !important;
+}
+
+.pill-nav-link.is-active .pill-nav-label,
+.pill-nav-link.is-hovered .pill-nav-label {
+  color: var(--pill-text-color, #000000) !important;
+}
+
+.pill-nav-label {
+  display: inline-block;
+  pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .pill-nav-container {
+    padding: 0.3rem 0.35rem;
+    gap: 0.35rem;
+  }
+
+  .pill-nav-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .pill-nav-logo-wrap {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Six tabs: tighten spacing on narrower windows so the bar still fits */
+@media (max-width: 1000px) {
+  .pill-nav-link { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
+  .pill-nav-items-track { gap: 0.1rem; }
+}
+
+@media (max-width: 720px) {
+  .pill-nav-container { padding: 0.28rem 0.3rem; gap: 0.25rem; }
+  .pill-nav-link { padding: 0.35rem 0.42rem; font-size: 0.72rem; }
+  .pill-nav-logo-wrap { width: 30px; height: 30px; }
+}

@@ -1,0 +1,304 @@
+.pet-page {
+  --pt-surface: #0e0f12;
+  --pt-surface-2: #15171c;
+  --pt-line: rgba(255, 255, 255, 0.08);
+  --pt-line-strong: rgba(255, 255, 255, 0.14);
+  --pt-text: #f4f5f7;
+  --pt-text-2: #a1a6b0;
+  --pt-text-3: #6b7180;
+  --pt-gold: #d9b45b;
+
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 5rem;
+  position: relative;
+  z-index: 10;
+  font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: var(--pt-text);
+}
+
+.pet-head-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+
+.pet-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.pet-sub { margin-top: 2px; font-size: 0.82rem; color: var(--pt-text-3); }
+
+.pet-icon-btn {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--pt-line-strong);
+  color: var(--pt-text-2);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.pet-icon-btn:hover { background: var(--pt-surface-2); color: var(--pt-text); }
+
+.pet-state {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--pt-text-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pet-top-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.pet-card {
+  background: var(--pt-surface);
+  border: 1px solid var(--pt-line);
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pet-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; }
+
+.pet-card-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.pet-count { font-size: 0.78rem; color: var(--pt-text-3); }
+
+.pet-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pt-text-3);
+}
+
+.pet-unit { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.76rem; font-weight: 400; color: var(--pt-text-3); }
+
+/* ---------- The dog ---------- */
+.pet-stage {
+  border: 1px solid var(--pt-line);
+  border-radius: 12px;
+  background: radial-gradient(120% 90% at 50% 100%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 60%);
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0 0.25rem;
+}
+.pet-stage-happy { background: radial-gradient(120% 90% at 50% 100%, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0) 60%); }
+.pet-stage-sick { background: radial-gradient(120% 90% at 50% 100%, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0) 60%); }
+.pet-stage-dead { background: radial-gradient(120% 90% at 50% 100%, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0) 60%); }
+
+.pet-stage { position: relative; }
+.pet-stage .dog-svg { max-width: 320px; }
+
+.pet-replay-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--pt-line);
+  color: var(--pt-text-3);
+  cursor: pointer;
+}
+.pet-replay-btn:hover { background: var(--pt-surface-2); color: var(--pt-text); }
+
+/* ---------- Pet info ---------- */
+.pet-info { display: flex; flex-direction: column; gap: 0.85rem; }
+
+.pet-name-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.pet-name { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; }
+
+.pet-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--pt-line-strong);
+  color: var(--pt-text-2);
+}
+.pet-mood-tag.mood-happy { color: #10b981; border-color: rgba(16, 185, 129, 0.35); background: rgba(16, 185, 129, 0.1); }
+.pet-mood-tag.mood-okay { color: #f59e0b; border-color: rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.1); }
+.pet-mood-tag.mood-sick,
+.pet-mood-tag.mood-dead { color: #ef4444; border-color: rgba(239, 68, 68, 0.35); background: rgba(239, 68, 68, 0.1); }
+
+.pet-message { font-size: 0.9rem; color: var(--pt-text-2); line-height: 1.5; }
+
+.pet-meter { display: flex; flex-direction: column; gap: 6px; }
+.pet-meter-head { display: flex; align-items: baseline; justify-content: space-between; }
+.pet-meter-value { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; }
+
+.pet-meter-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+.pet-meter-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+
+.pet-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--pt-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.pet-fact { display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-left: 1px solid var(--pt-line); min-width: 0; }
+.pet-fact:first-child { border-left: none; }
+.pet-fact-value { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 600; }
+.pet-fact-small { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; font-weight: 500; color: var(--pt-text-2); line-height: 1.35; }
+
+.pet-fed { display: flex; flex-direction: column; gap: 8px; padding-top: 1rem; border-top: 1px solid var(--pt-line); }
+.pet-fed-empty { font-size: 0.85rem; color: var(--pt-text-3); display: flex; align-items: center; gap: 10px; }
+.pet-fed-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.pet-fed-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 9px;
+  border: 1px solid var(--pt-line);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+.pet-fed-dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
+.pet-fed-chip.bad .pet-fed-dot { background: #ef4444; }
+.pet-fed-score { font-family: 'Outfit', sans-serif; font-weight: 600; color: var(--pt-text-2); }
+
+.pet-link-btn {
+  background: transparent;
+  border: 1px solid var(--pt-line-strong);
+  border-radius: 8px;
+  padding: 5px 10px;
+  color: var(--pt-text-2);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.pet-link-btn:hover { background: var(--pt-surface-2); color: var(--pt-text); }
+
+/* ---------- Tasks ---------- */
+.pet-task-list { list-style: none; display: flex; flex-direction: column; border: 1px solid var(--pt-line); border-radius: 12px; overflow: hidden; }
+
+.pet-task {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 10px;
+  padding: 11px 12px;
+  border-top: 1px solid var(--pt-line);
+  font-size: 0.88rem;
+}
+.pet-task:first-child { border-top: none; }
+
+.pet-task-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 1px solid var(--pt-line-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0b0c0f;
+}
+.pet-task.done .pet-task-check { background: #10b981; border-color: #10b981; }
+.pet-task.failed .pet-task-check { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #ef4444; }
+.pet-task.done .pet-task-title { color: var(--pt-text-2); }
+.pet-task-progress { font-size: 0.76rem; color: var(--pt-text-3); white-space: nowrap; }
+.pet-task.done .pet-task-progress { color: #10b981; }
+.pet-task.failed .pet-task-progress { color: #ef4444; }
+
+.pet-note { font-size: 0.76rem; color: var(--pt-text-3); }
+
+/* ---------- Badges ---------- */
+.pet-badge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+
+.pet-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--pt-line);
+  border-radius: 12px;
+}
+
+.pet-badge-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--pt-line-strong);
+  color: var(--pt-text-3);
+}
+
+.pet-badge.earned { border-color: rgba(217, 180, 91, 0.35); background: rgba(217, 180, 91, 0.05); }
+.pet-badge.earned .pet-badge-icon { color: var(--pt-gold); border-color: rgba(217, 180, 91, 0.5); background: rgba(217, 180, 91, 0.1); }
+.pet-badge.locked .pet-badge-title { color: var(--pt-text-2); }
+
+.pet-badge-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+.pet-badge-title { font-size: 0.9rem; font-weight: 600; }
+.pet-badge-desc { font-size: 0.78rem; color: var(--pt-text-3); line-height: 1.35; }
+.pet-badge-progress { display: flex; align-items: center; gap: 8px; margin-top: 5px; font-size: 0.72rem; color: var(--pt-text-3); white-space: nowrap; }
+
+@media (max-width: 720px) {
+  .pet-top-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Tasks v2 ---------- */
+.pet-xp-row { display: flex; flex-direction: column; gap: 6px; }
+.pet-xp-value { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 600; }
+
+.pet-task { grid-template-columns: 22px minmax(0, 1fr) auto; align-items: start; }
+.pet-task-check { margin-top: 1px; }
+.pet-task-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pet-task-title { line-height: 1.35; }
+.pet-task-progress { white-space: normal; }
+.pet-task-xp {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--pt-text-3);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+.pet-task.done .pet-task-xp { color: var(--pt-gold); }
+.pet-task.failed .pet-task-title { color: var(--pt-text-3); text-decoration: line-through; }
+
+/* ---------- Badge groups and tiers ---------- */
+.pet-badge-group { display: flex; flex-direction: column; gap: 8px; }
+.pet-badge.earned.tier-bronze { border-color: rgba(185, 133, 96, 0.45); background: rgba(185, 133, 96, 0.07); }
+.pet-badge.earned.tier-bronze .pet-badge-icon { color: #c9946c; border-color: rgba(185, 133, 96, 0.6); background: rgba(185, 133, 96, 0.12); }
+.pet-badge.earned.tier-silver { border-color: rgba(180, 186, 196, 0.4); background: rgba(180, 186, 196, 0.06); }
+.pet-badge.earned.tier-silver .pet-badge-icon { color: #c5cad3; border-color: rgba(180, 186, 196, 0.55); background: rgba(180, 186, 196, 0.1); }

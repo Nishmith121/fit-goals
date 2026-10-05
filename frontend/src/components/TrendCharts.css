@@ -1,0 +1,127 @@
+.tc-root {
+  --tc-surface: #0e0f12;
+  --tc-line: rgba(255, 255, 255, 0.08);
+  --tc-line-strong: rgba(255, 255, 255, 0.14);
+  --tc-text: #f4f5f7;
+  --tc-text-2: #a1a6b0;
+  --tc-text-3: #6b7180;
+  --tc-food: #199e70;   /* categorical slot 3 (dark), validated on this surface */
+  --tc-water: #3987e5;  /* categorical slot 1 (dark) */
+  --tc-good: #0ca30c;
+  --tc-bad: #d03b3b;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+}
+
+.tc-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+.tc-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--tc-text);
+}
+
+.tc-note { margin-top: 2px; font-size: 0.78rem; color: var(--tc-text-3); }
+
+.tc-toggle {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--tc-line);
+  border-radius: 10px;
+  background: var(--tc-surface);
+}
+
+.tc-toggle-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--tc-text-2);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.tc-toggle-btn:hover { color: var(--tc-text); }
+.tc-toggle-btn.active { background: var(--tc-text); color: #0b0c0f; font-weight: 600; }
+.tc-toggle-btn:focus-visible, .tc-plot:focus-visible { outline: 2px solid var(--tc-text); outline-offset: 2px; }
+
+.tc-grid-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+
+.tc-chart {
+  border: 1px solid var(--tc-line);
+  border-radius: 12px;
+  background: var(--tc-surface);
+  padding: 14px 14px 8px;
+  min-width: 0;
+}
+
+.tc-chart-head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px; }
+
+.tc-chart-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tc-text-3);
+}
+
+.tc-key { width: 14px; height: 2px; border-radius: 1px; }
+
+.tc-chart-stat { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.tc-stat-value { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; color: var(--tc-text); line-height: 1; }
+.tc-stat-unit { font-size: 0.78rem; color: var(--tc-text-3); }
+
+.tc-delta { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; font-size: 0.76rem; color: var(--tc-text-2); }
+.tc-delta.good svg { color: var(--tc-good); }
+.tc-delta.bad svg { color: var(--tc-bad); }
+.tc-delta.flat svg { color: var(--tc-text-3); }
+
+.tc-plot { position: relative; width: 100%; cursor: crosshair; border-radius: 6px; touch-action: pan-y; }
+.tc-plot svg { display: block; overflow: visible; }
+
+.tc-grid { stroke: var(--tc-line); stroke-width: 1; }
+.tc-ref { stroke: rgba(255, 255, 255, 0.28); stroke-width: 1; }
+.tc-crosshair { stroke: rgba(255, 255, 255, 0.35); stroke-width: 1; }
+.tc-tick { fill: var(--tc-text-3); font-size: 11px; font-variant-numeric: tabular-nums; }
+.tc-ref-label { fill: var(--tc-text-2); font-size: 11px; }
+.tc-end-label { fill: var(--tc-text); font-size: 12px; font-weight: 600; font-family: 'Outfit', sans-serif; }
+.tc-dot { stroke: var(--tc-surface); stroke-width: 2; transition: r 0.1s ease; }
+
+.tc-tooltip {
+  position: absolute;
+  top: 0;
+  transform: translate(-50%, -6px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  background: #1b1d23;
+  border: 1px solid var(--tc-line-strong);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.tc-tooltip-value {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--tc-text);
+}
+.tc-line-key { width: 12px; height: 2px; border-radius: 1px; }
+.tc-tooltip-label { font-size: 0.74rem; color: var(--tc-text-2); }

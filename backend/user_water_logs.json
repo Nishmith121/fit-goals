@@ -1,0 +1,177 @@
+{
+  "version": 2,
+  "users": {
+    "nishmith@gmail.com": {
+      "2026-10-03": {
+        "date": "2026-10-03",
+        "target_ml": 2500,
+        "entries": [
+          {
+            "id": "water-1791016434966",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "02:03 PM"
+          },
+          {
+            "id": "water-1791017589610",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "02:23 PM"
+          },
+          {
+            "id": "water-1791024037368",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "04:10 PM"
+          },
+          {
+            "id": "water-1791024038771",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "04:10 PM"
+          },
+          {
+            "id": "water-1791046362389",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "10:22 PM"
+          }
+        ]
+      },
+      "2026-10-04": {
+        "date": "2026-10-04",
+        "target_ml": 2500,
+        "entries": [
+          {
+            "id": "water-1791101207442",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "01:36 PM"
+          },
+          {
+            "id": "water-1791102069883",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "01:51 PM"
+          },
+          {
+            "id": "water-1791102163792",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "01:52 PM"
+          },
+          {
+            "id": "water-1791105748205",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "02:52 PM"
+          },
+          {
+            "id": "water-1791135812427",
+            "amount_ml": 150,
+            "type": "Cup of water",
+            "time": "11:13 PM"
+          }
+        ]
+      },
+      "2026-10-05": {
+        "date": "2026-10-05",
+        "target_ml": 2500,
+        "entries": [
+          {
+            "id": "water-1791186243870",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "01:14 PM"
+          }
+        ]
+      }
+    },
+    "yadavnishmith@gmail.com": {
+      "2026-10-03": {
+        "date": "2026-10-03",
+        "target_ml": 2500,
+        "entries": [
+          {
+            "id": "water-1791016434966",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "02:03 PM"
+          },
+          {
+            "id": "water-1791017589610",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "02:23 PM"
+          },
+          {
+            "id": "water-1791024037368",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "04:10 PM"
+          },
+          {
+            "id": "water-1791024038771",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "04:10 PM"
+          },
+          {
+            "id": "water-1791046362389",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "10:22 PM"
+          }
+        ]
+      },
+      "2026-10-04": {
+        "date": "2026-10-04",
+        "target_ml": 2500,
+        "entries": [
+          {
+            "id": "water-1791101207442",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "01:36 PM"
+          },
+          {
+            "id": "water-1791102069883",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "01:51 PM"
+          },
+          {
+            "id": "water-1791102163792",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "01:52 PM"
+          },
+          {
+            "id": "water-1791105748205",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "02:52 PM"
+          },
+          {
+            "id": "water-1791135812427",
+            "amount_ml": 150,
+            "type": "Cup of water",
+            "time": "11:13 PM"
+          }
+        ]
+      },
+      "2026-10-05": {
+        "date": "2026-10-05",
+        "target_ml": 2500,
+        "entries": [
+          {
+            "id": "water-1791142782969",
+            "amount_ml": 250,
+            "type": "Glass of water",
+            "time": "01:09 AM"
+          }
+        ]
+      }
+    }
+  }
+}

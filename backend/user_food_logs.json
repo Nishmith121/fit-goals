@@ -1,0 +1,385 @@
+{
+  "version": 2,
+  "users": {
+    "nishmith@gmail.com": {
+      "2026-09-28": {
+        "date": "2026-09-28",
+        "day": "Monday",
+        "items": []
+      },
+      "2026-10-03": {
+        "date": "2026-10-03",
+        "day": "Saturday",
+        "items": [
+          {
+            "id": "item-1791007588726",
+            "name": "Sprouts salad",
+            "score": 90.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "11:36 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791046187769",
+            "name": "Masala Dosa",
+            "score": 90.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "10:19 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791046214003",
+            "name": "Soda",
+            "score": 35.0,
+            "rating": "Not good",
+            "verdict": "Not good choice. Commercial sodas are high in carbonation and acidity with zero nutritional value.",
+            "time": "10:20 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791046227452",
+            "name": "Aloo sandwich",
+            "score": 42.0,
+            "rating": "Okay",
+            "verdict": "Moderate choice. Fine in a balanced diet, eat in moderation.",
+            "time": "10:20 PM",
+            "from_dataset": true
+          }
+        ]
+      },
+      "2026-10-02": {
+        "date": "2026-10-02",
+        "day": "Friday",
+        "items": [
+          {
+            "id": "item-1790976929814",
+            "name": "Soft Drink",
+            "score": 25.0,
+            "rating": "Not good",
+            "verdict": "Not good choice. High in liquid sugar, empty calories, artificial additives and carbonation.",
+            "time": "03:05 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790976976447",
+            "name": "Kurkure",
+            "score": 16.0,
+            "rating": "Bad",
+            "verdict": "Bad choice. High in junk, refined flour, oxidized oils or added sugars.",
+            "time": "03:06 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790978264771",
+            "name": "Soda",
+            "score": 35.0,
+            "rating": "Not good",
+            "verdict": "Not good choice. Commercial sodas are high in carbonation and acidity with zero nutritional value.",
+            "time": "03:27 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790978289958",
+            "name": "Dosa",
+            "score": 90.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "03:28 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790978321701",
+            "name": "Sambar rice",
+            "score": 90.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "03:28 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790978392388",
+            "name": "Chocolate donut",
+            "score": 2.0,
+            "rating": "Not good",
+            "verdict": "Not good. High in junk, refined flour, oxidized oils or added sugars.",
+            "time": "03:29 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790978411177",
+            "name": "Cheesecake",
+            "score": 20.0,
+            "rating": "Not good",
+            "verdict": "Not good. High in junk, refined flour, oxidized oils or added sugars.",
+            "time": "03:30 AM",
+            "from_dataset": true
+          }
+        ]
+      },
+      "2026-10-04": {
+        "date": "2026-10-04",
+        "day": "Sunday",
+        "items": [
+          {
+            "id": "item-1791102014033",
+            "name": "Peanuts",
+            "score": 90.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "01:50 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791105660512",
+            "name": "Chicken curry",
+            "score": 66.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "02:51 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791105676288",
+            "name": "Chilli chicken",
+            "score": 26.0,
+            "rating": "Not good",
+            "verdict": "Not good. High in junk, refined flour, oxidized oils or added sugars.",
+            "time": "02:51 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791109420648",
+            "name": "Plain rice",
+            "score": 50.0,
+            "rating": "Okay",
+            "verdict": "Moderate choice. Fine in a balanced diet, eat in moderation.",
+            "time": "03:53 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791135792360",
+            "name": "Plain rice",
+            "score": 50.0,
+            "rating": "Okay",
+            "verdict": "Moderate choice. Fine in a balanced diet, eat in moderation.",
+            "time": "11:13 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791135802409",
+            "name": "Tomato rasam",
+            "score": 80.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "11:13 PM",
+            "from_dataset": true
+          }
+        ]
+      },
+      "2026-10-05": {
+        "date": "2026-10-05",
+        "day": "Monday",
+        "items": [
+          {
+            "id": "item-1791186168189",
+            "name": "White bread",
+            "score": 42.0,
+            "rating": "Okay",
+            "verdict": "Moderate choice. Fine in a balanced diet, eat in moderation.",
+            "time": "01:12 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791186219566",
+            "name": "Fresh sweet lime juice",
+            "score": 55.0,
+            "rating": "Okay",
+            "verdict": "Moderate choice. Fine in a balanced diet, eat in moderation.",
+            "time": "01:13 PM",
+            "from_dataset": true
+          }
+        ]
+      }
+    },
+    "yadavnishmith@gmail.com": {
+      "2026-09-28": {
+        "date": "2026-09-28",
+        "day": "Monday",
+        "items": []
+      },
+      "2026-10-03": {
+        "date": "2026-10-03",
+        "day": "Saturday",
+        "items": [
+          {
+            "id": "item-1791007588726",
+            "name": "Sprouts salad",
+            "score": 90.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "11:36 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791046187769",
+            "name": "Masala Dosa",
+            "score": 90.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "10:19 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791046214003",
+            "name": "Soda",
+            "score": 35.0,
+            "rating": "Not good",
+            "verdict": "Not good choice. Commercial sodas are high in carbonation and acidity with zero nutritional value.",
+            "time": "10:20 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791046227452",
+            "name": "Aloo sandwich",
+            "score": 42.0,
+            "rating": "Okay",
+            "verdict": "Moderate choice. Fine in a balanced diet, eat in moderation.",
+            "time": "10:20 PM",
+            "from_dataset": true
+          }
+        ]
+      },
+      "2026-10-02": {
+        "date": "2026-10-02",
+        "day": "Friday",
+        "items": [
+          {
+            "id": "item-1790976929814",
+            "name": "Soft Drink",
+            "score": 25.0,
+            "rating": "Not good",
+            "verdict": "Not good choice. High in liquid sugar, empty calories, artificial additives and carbonation.",
+            "time": "03:05 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790976976447",
+            "name": "Kurkure",
+            "score": 16.0,
+            "rating": "Bad",
+            "verdict": "Bad choice. High in junk, refined flour, oxidized oils or added sugars.",
+            "time": "03:06 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790978264771",
+            "name": "Soda",
+            "score": 35.0,
+            "rating": "Not good",
+            "verdict": "Not good choice. Commercial sodas are high in carbonation and acidity with zero nutritional value.",
+            "time": "03:27 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790978289958",
+            "name": "Dosa",
+            "score": 90.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "03:28 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790978321701",
+            "name": "Sambar rice",
+            "score": 90.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "03:28 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790978392388",
+            "name": "Chocolate donut",
+            "score": 2.0,
+            "rating": "Not good",
+            "verdict": "Not good. High in junk, refined flour, oxidized oils or added sugars.",
+            "time": "03:29 AM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1790978411177",
+            "name": "Cheesecake",
+            "score": 20.0,
+            "rating": "Not good",
+            "verdict": "Not good. High in junk, refined flour, oxidized oils or added sugars.",
+            "time": "03:30 AM",
+            "from_dataset": true
+          }
+        ]
+      },
+      "2026-10-04": {
+        "date": "2026-10-04",
+        "day": "Sunday",
+        "items": [
+          {
+            "id": "item-1791102014033",
+            "name": "Peanuts",
+            "score": 90.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "01:50 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791105660512",
+            "name": "Chicken curry",
+            "score": 66.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "02:51 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791105676288",
+            "name": "Chilli chicken",
+            "score": 26.0,
+            "rating": "Not good",
+            "verdict": "Not good. High in junk, refined flour, oxidized oils or added sugars.",
+            "time": "02:51 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791109420648",
+            "name": "Plain rice",
+            "score": 50.0,
+            "rating": "Okay",
+            "verdict": "Moderate choice. Fine in a balanced diet, eat in moderation.",
+            "time": "03:53 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791135792360",
+            "name": "Plain rice",
+            "score": 50.0,
+            "rating": "Okay",
+            "verdict": "Moderate choice. Fine in a balanced diet, eat in moderation.",
+            "time": "11:13 PM",
+            "from_dataset": true
+          },
+          {
+            "id": "item-1791135802409",
+            "name": "Tomato rasam",
+            "score": 80.0,
+            "rating": "Good",
+            "verdict": "Great choice! Nutrient-dense, wholesome fuel and good for health.",
+            "time": "11:13 PM",
+            "from_dataset": true
+          }
+        ]
+      }
+    }
+  }
+}

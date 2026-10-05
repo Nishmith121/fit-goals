@@ -1,0 +1,1239 @@
+/* ---------- Water Reminder & Hydration Tracker Styles ---------- */
+.water-tracker-root {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  z-index: 10;
+  position: relative;
+  pointer-events: auto;
+  padding-bottom: 5rem;
+}
+
+/* Header & Date Strip */
+.water-header-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.water-date-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  backdrop-filter: blur(14px);
+}
+
+.water-nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.water-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.water-date-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 140px;
+}
+
+.water-day-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.water-today-pill {
+  font-size: 0.62rem;
+  font-weight: 800;
+  background: rgba(6, 182, 212, 0.2);
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  color: #38bdf8;
+  padding: 0.05rem 0.4rem;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+
+.water-date-subtitle {
+  font-size: 0.74rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* Hero Water Gauge & Progress Display */
+.water-hero-card {
+  background: #0e0d15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 2.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  flex-wrap: wrap;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.water-hero-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Circular Water Flask Graphic */
+.water-flask-graphic {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  border: 3px solid rgba(14, 165, 233, 0.35);
+  box-shadow: 0 0 25px rgba(14, 165, 233, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.water-wave-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+  transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.85;
+}
+
+.water-wave-fill::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: -50%;
+  width: 200%;
+  height: 24px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,40 L1200,120 L0,120 Z' fill='%2338bdf8'/%3E%3C/svg%3E");
+  background-size: 50% 100%;
+  animation: waveMotion 4s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes waveMotion {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.water-flask-content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.flask-percent-number {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.flask-percent-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #e0f2fe;
+  margin-top: 0.2rem;
+}
+
+/* Water Hero Stats */
+.water-hero-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 260px;
+}
+
+.water-stat-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.stat-drank-val {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #38bdf8;
+  font-family: 'Outfit', sans-serif;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+}
+
+.stat-target-val {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.water-status-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.status-badge-hydrated {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.status-badge-pending {
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.35);
+  color: #38bdf8;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.water-subtext {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+/* Primary Hero Action Button */
+.drink-glass-hero-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1.1rem 2rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  border: none;
+  color: #000000;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(14, 165, 233, 0.4);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  user-select: none;
+}
+
+.drink-glass-hero-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(14, 165, 233, 0.55);
+  filter: brightness(1.06);
+}
+
+.drink-glass-hero-btn:active {
+  transform: translateY(0);
+}
+
+.drink-glass-hero-btn span {
+  color: #000000 !important;
+}
+
+/* Quick Presets Bar */
+.water-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+}
+
+.preset-chip-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  font-family: 'Outfit', sans-serif;
+}
+
+.preset-chip-btn:hover {
+  background: rgba(14, 165, 233, 0.1);
+  border-color: rgba(14, 165, 233, 0.35);
+  transform: translateY(-1px);
+}
+
+.preset-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.preset-amount {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+/* Custom ML Input Row */
+.custom-ml-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 0.4rem 0.6rem 0.4rem 1rem;
+}
+
+.custom-ml-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.custom-ml-input::placeholder {
+  color: #64748b;
+}
+
+.custom-ml-btn {
+  padding: 0.5rem 1.1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.custom-ml-btn:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* ---------- Hourly Reminder Controller Card ---------- */
+.reminder-card {
+  background: #0e0d15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.reminder-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.reminder-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.reminder-main-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reminder-pulse-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  display: inline-block;
+  animation: pulseGreen 2s infinite;
+}
+
+.reminder-pulse-dot.off {
+  background: #64748b;
+  box-shadow: none;
+  animation: none;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.reminder-sub-desc {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* Master Reminder Toggle Switch */
+.toggle-switch-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.toggle-track {
+  width: 48px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.toggle-track.active {
+  background: #0284c7;
+  border-color: #38bdf8;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+.toggle-thumb {
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toggle-track.active .toggle-thumb {
+  left: 23px;
+}
+
+.toggle-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  min-width: 32px;
+}
+
+/* Reminder Live Countdown Display */
+.countdown-banner {
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  border-radius: 18px;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.countdown-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.countdown-subtext {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+}
+
+.countdown-digits {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.countdown-interval-tag {
+  font-size: 0.75rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.reminder-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.reminder-action-btn {
+  padding: 0.45rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reminder-action-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.reminder-action-btn.test-btn {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: rgba(6, 182, 212, 0.4);
+  color: #38bdf8;
+}
+
+.reminder-action-btn.test-btn:hover {
+  background: #38bdf8;
+  color: #000000;
+  border-color: #38bdf8;
+}
+
+/* Interval Picker Chips */
+.interval-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.interval-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-right: 0.3rem;
+}
+
+.interval-pill {
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  outline: none;
+}
+
+.interval-pill:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.interval-pill.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700;
+  border-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Glasses Silhouette Row */
+.glasses-grid-card {
+  background: #0e0d15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.glasses-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.glasses-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.glasses-track {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.glass-indicator-item {
+  width: 38px;
+  height: 48px;
+  border-radius: 6px 6px 14px 14px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.glass-indicator-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.6);
+}
+
+.glass-indicator-item.filled {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+}
+
+.glass-water-inner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80%;
+  background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+  border-radius: 0 0 10px 10px;
+}
+
+.glass-number {
+  position: relative;
+  z-index: 2;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.glass-indicator-item.filled .glass-number {
+  color: #000000;
+}
+
+/* Today's Log Timeline */
+.water-timeline-card {
+  background: #0e0d15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timeline-count-tag {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timeline-entry-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.95rem 1.35rem;
+  background: #0e0d15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-entry-row:hover {
+  background: #14131e;
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.entry-left-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.entry-water-bubble {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.entry-type-text {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.entry-time-text {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.entry-right-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.entry-amount-pill {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.entry-delete-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 1.25rem;
+  font-weight: 400;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.entry-delete-btn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.entry-delete-btn:hover {
+  color: #ef4444;
+}
+
+/* Empty State */
+.water-empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #64748b;
+  font-size: 0.88rem;
+}
+
+/* Floating In-App Reminder Modal/Toast */
+.water-alert-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.water-alert-dialog {
+  background: #0d1624;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 24px;
+  padding: 2rem 2.25rem;
+  max-width: 440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.25);
+  animation: alertPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes alertPop {
+  from { opacity: 0; transform: scale(0.92) translateY(15px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.alert-water-glow {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #38bdf8 0%, #0284c7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
+  font-size: 2rem;
+  color: #000000;
+  font-weight: 900;
+}
+
+.alert-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+}
+
+.alert-body-text {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+.alert-buttons-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.alert-drank-btn {
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  background: #38bdf8;
+  border: none;
+  border-radius: 16px;
+  color: #000000;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+}
+
+.alert-drank-btn:hover {
+  background: #7dd3fc;
+  transform: translateY(-1px);
+}
+
+.alert-snooze-btn {
+  width: 100%;
+  padding: 0.7rem 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  color: #94a3b8;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.alert-snooze-btn:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ---------- Shredder Integration Styles ---------- */
+.shredder-water-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shredder-hint-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  color: #94a3b8;
+  text-align: center;
+  user-select: none;
+}
+
+.shredder-hint-icon {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.shredder-hint-text strong {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+/* Ensure timeline-entry-row has solid dark card background for sharp snapshot rendering in Shredder */
+.shredder__slot .timeline-entry-row {
+  background: #0e0d15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  cursor: grab;
+}
+
+.shredder__slot .timeline-entry-row:hover {
+  background: #14131e;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.shredder__slot[data-active] .timeline-entry-row {
+  cursor: grabbing;
+  background: #181726;
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+}
+
+
+/* =========================================================
+   REFINED THEME (visual polish only)
+   Layout, effects, transitions and keyframes above are untouched.
+   ========================================================= */
+.water-tracker-root {
+  --wt-surface: #0e0f12;
+  --wt-surface-2: #15171c;
+  --wt-line: rgba(255, 255, 255, 0.08);
+  --wt-line-strong: rgba(255, 255, 255, 0.14);
+  --wt-text: #f4f5f7;
+  --wt-text-2: #a1a6b0;
+  --wt-text-3: #6b7180;
+  --wt-water: #5bb8ea;
+  font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Date bar */
+.water-tracker-root .water-date-bar {
+  background: var(--wt-surface);
+  border-color: var(--wt-line);
+  border-radius: 14px;
+  backdrop-filter: none;
+}
+.water-tracker-root .water-nav-btn {
+  background: transparent;
+  border-color: var(--wt-line-strong);
+  border-radius: 10px;
+  color: var(--wt-text-2);
+}
+.water-tracker-root .water-nav-btn:hover { background: var(--wt-surface-2); color: var(--wt-text); }
+.water-tracker-root .water-day-title { font-family: 'Outfit', sans-serif; font-weight: 600; }
+.water-tracker-root .water-date-subtitle { color: var(--wt-text-3); }
+.water-tracker-root .water-today-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  background: transparent;
+  border: 1px solid var(--wt-line-strong);
+  border-radius: 6px;
+  color: var(--wt-text-2);
+  padding: 0.1rem 0.45rem;
+}
+
+/* Cards: one neutral dark, hairline borders, no drop shadows */
+.water-tracker-root .water-hero-card,
+.water-tracker-root .reminder-card,
+.water-tracker-root .glasses-grid-card,
+.water-tracker-root .water-timeline-card {
+  background: var(--wt-surface);
+  border: 1px solid var(--wt-line);
+  border-radius: 16px;
+  box-shadow: none;
+}
+.water-tracker-root .water-hero-card::before { display: none; }
+
+/* Hero */
+.water-tracker-root .stat-drank-val {
+  font-size: 2.6rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--wt-text);
+  text-shadow: none;
+}
+.water-tracker-root .stat-target-val { font-size: 1rem; font-weight: 400; color: var(--wt-text-3); }
+.water-tracker-root .status-badge-hydrated,
+.water-tracker-root .status-badge-pending {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  border-radius: 6px;
+  padding: 0.2rem 0.55rem;
+}
+.water-tracker-root .status-badge-pending {
+  background: rgba(91, 184, 234, 0.1);
+  border-color: rgba(91, 184, 234, 0.3);
+  color: var(--wt-water);
+}
+.water-tracker-root .water-status-pills .preset-amount { color: var(--wt-text-3); font-weight: 500; }
+
+.water-tracker-root .drink-glass-hero-btn {
+  padding: 0.85rem 1.5rem;
+  border-radius: 12px;
+  background: var(--wt-text);
+  box-shadow: none;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.water-tracker-root .drink-glass-hero-btn:hover { background: #ffffff; box-shadow: none; filter: none; }
+
+/* Presets */
+.water-tracker-root .preset-chip-btn {
+  background: var(--wt-surface);
+  border-color: var(--wt-line);
+  border-radius: 12px;
+  font-family: inherit;
+}
+.water-tracker-root .preset-chip-btn:hover {
+  background: var(--wt-surface-2);
+  border-color: var(--wt-line-strong);
+}
+.water-tracker-root .preset-title { font-weight: 600; color: var(--wt-text); }
+.water-tracker-root .preset-amount { font-weight: 500; color: var(--wt-text-3); }
+
+.water-tracker-root .custom-ml-row {
+  background: var(--wt-surface);
+  border-color: var(--wt-line);
+  border-radius: 12px;
+}
+.water-tracker-root .custom-ml-input { font-family: inherit; font-weight: 400; }
+.water-tracker-root .custom-ml-btn {
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: 8px;
+  background: var(--wt-text);
+  border-color: var(--wt-text);
+  color: #0b0c0f;
+}
+.water-tracker-root .custom-ml-btn:hover { background: #ffffff; }
+
+/* Reminders */
+.water-tracker-root .reminder-main-title,
+.water-tracker-root .glasses-title,
+.water-tracker-root .timeline-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--wt-text);
+}
+.water-tracker-root .reminder-sub-desc { color: var(--wt-text-2); }
+.water-tracker-root .reminder-header-row { border-bottom-color: var(--wt-line); }
+.water-tracker-root .toggle-track.active {
+  background: var(--wt-water);
+  border-color: var(--wt-water);
+  box-shadow: none;
+}
+.water-tracker-root .toggle-label { font-weight: 500; color: var(--wt-text-2); }
+
+.water-tracker-root .countdown-banner {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--wt-line);
+  border-radius: 12px;
+}
+.water-tracker-root .countdown-subtext,
+.water-tracker-root .interval-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--wt-text-3);
+}
+.water-tracker-root .countdown-digits { font-size: 1.7rem; font-weight: 600; letter-spacing: 0; }
+.water-tracker-root .countdown-interval-tag { color: var(--wt-text-3); font-weight: 400; }
+
+.water-tracker-root .reminder-action-btn,
+.water-tracker-root .reminder-action-btn.test-btn {
+  font-family: inherit;
+  font-weight: 500;
+  border-radius: 10px;
+  background: transparent;
+  border-color: var(--wt-line-strong);
+  color: var(--wt-text-2);
+}
+.water-tracker-root .reminder-action-btn:hover,
+.water-tracker-root .reminder-action-btn.test-btn:hover {
+  background: var(--wt-surface-2);
+  border-color: var(--wt-line-strong);
+  color: var(--wt-text);
+}
+
+.water-tracker-root .interval-pill {
+  font-family: inherit;
+  font-weight: 500;
+  background: transparent;
+  border-color: var(--wt-line);
+  border-radius: 8px;
+  color: var(--wt-text-2);
+}
+.water-tracker-root .interval-pill.active { font-weight: 600; box-shadow: none; }
+
+/* Glasses */
+.water-tracker-root .glass-indicator-item { border-width: 1px; border-color: var(--wt-line-strong); background: transparent; }
+.water-tracker-root .glass-indicator-item:hover { border-color: var(--wt-water); }
+.water-tracker-root .glass-indicator-item.filled {
+  border-color: var(--wt-water);
+  background: rgba(91, 184, 234, 0.12);
+  box-shadow: none;
+}
+.water-tracker-root .glass-water-inner { background: var(--wt-water); }
+.water-tracker-root .glass-number { font-weight: 600; }
+
+/* Log */
+.water-tracker-root .timeline-count-tag { color: var(--wt-text-3); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; }
+.water-tracker-root .timeline-entry-row,
+.water-tracker-root .shredder__slot .timeline-entry-row {
+  background: var(--wt-surface);
+  border: 1px solid var(--wt-line);
+  border-radius: 12px;
+  box-shadow: none;
+}
+.water-tracker-root .timeline-entry-row:hover,
+.water-tracker-root .shredder__slot .timeline-entry-row:hover {
+  background: var(--wt-surface-2);
+  border-color: var(--wt-line-strong);
+  box-shadow: none;
+}
+.water-tracker-root .shredder__slot[data-active] .timeline-entry-row {
+  background: var(--wt-surface-2);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+.water-tracker-root .entry-water-bubble { width: 8px; height: 8px; background: var(--wt-water); box-shadow: none; }
+.water-tracker-root .entry-type-text { font-weight: 600; }
+.water-tracker-root .entry-time-text { color: var(--wt-text-3); }
+.water-tracker-root .entry-amount-pill {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  color: var(--wt-text);
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+.water-tracker-root .shredder-hint-bar { background: transparent; border-color: var(--wt-line); color: var(--wt-text-3); }
+
+/* Reminder dialog */
+.water-tracker-root .water-alert-dialog {
+  background: var(--wt-surface);
+  border: 1px solid var(--wt-line-strong);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+.water-tracker-root .alert-water-glow {
+  background: rgba(91, 184, 234, 0.12);
+  color: var(--wt-water);
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.water-tracker-root .alert-title { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1.2rem; }
+.water-tracker-root .alert-drank-btn {
+  background: var(--wt-text);
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: none;
+}
+.water-tracker-root .alert-drank-btn:hover { background: #ffffff; }
+.water-tracker-root .alert-snooze-btn { border-radius: 12px; font-family: inherit; font-weight: 500; }
+.water-tracker-root .countdown-banner > .countdown-subtext {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
