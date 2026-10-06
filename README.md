@@ -2,6 +2,8 @@
 
 FitGoals AI is an intelligent, full-stack fitness and nutrition platform powered by Machine Learning. It analyzes daily dietary habits, scores meals with an ML model, tracks hydration in real-time, features a gamified virtual companion that evolves with your health stats, and hosts a competitive leaderboard.
 
+### 🌐 [Live Demo → https://fit-goals-un4m.onrender.com](https://fit-goals-un4m.onrender.com/)
+
 ---
 
 ## ✨ Features
