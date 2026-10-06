@@ -10,6 +10,7 @@ import PetPage from './components/PetPage';
 import Leaderboard from './components/Leaderboard';
 import TodayFitnessScore from './components/TodayFitnessScore';
 import AuthModal from './components/AuthModal';
+import StreakBadge from './components/StreakBadge';
 import MagicBento, { GlobalSpotlight } from './components/MagicBento';
 import { useAuth } from './context/AuthContext';
 import { LiquidMetalButton } from '@/components/ui/liquid-metal-button';
@@ -164,6 +165,7 @@ export default function App() {
 
           {/* Athlete Profile / Auth Trigger Chip (Contains Today's Score & Leaderboard when logged in) */}
           <div className="user-nav-chip-wrapper">
+            {user && <StreakBadge refreshKey={`${user.email}|${user.points_display}`} />}
             {user ? (
               <div
                 className="user-profile-badge"

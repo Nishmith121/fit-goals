@@ -5,7 +5,7 @@ import hashlib
 import uuid
 import threading
 import urllib.request
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 import pandas as pd
@@ -28,6 +28,40 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ── User-local time ──────────────────────────────────────────────────────
+# The server (Render) runs on UTC, so now_local() there is 5h30m behind IST.
+# The frontend sends the browser's UTC offset in an X-TZ-Offset header (minutes
+# east of UTC); requests without it fall back to DEFAULT_TZ_OFFSET_MIN (IST).
+import contextvars
+
+DEFAULT_TZ_OFFSET_MIN = int(os.environ.get("DEFAULT_TZ_OFFSET_MIN", "330"))
+_tz_offset_min = contextvars.ContextVar("tz_offset_min", default=DEFAULT_TZ_OFFSET_MIN)
+
+def now_local() -> datetime:
+    """Current wall-clock time for the user making this request."""
+    return datetime.utcnow() + timedelta(minutes=_tz_offset_min.get())
+
+class _UserTimezoneMiddleware:
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] == "http":
+            offset = DEFAULT_TZ_OFFSET_MIN
+            for k, v in scope.get("headers", []):
+                if k == b"x-tz-offset":
+                    try:
+                        val = int(v.decode())
+                        if -720 <= val <= 840:
+                            offset = val
+                    except ValueError:
+                        pass
+                    break
+            _tz_offset_min.set(offset)
+        await self.app(scope, receive, send)
+
+app.add_middleware(_UserTimezoneMiddleware)
 
 # ── Auto-Pinger (keeps Render free-tier alive) ──────────────────────────
 RENDER_EXTERNAL_URL = os.environ.get("RENDER_EXTERNAL_URL", "")
@@ -176,7 +210,7 @@ def save_food_logs(data: dict, email: Optional[str] = None):
 def init_default_water_dataset():
     """Initializes sample water tracking dataset if not yet created."""
     if not WATER_LOGS_FILE.exists():
-        today = datetime.now().strftime("%Y-%m-%d")
+        today = now_local().strftime("%Y-%m-%d")
         sample_water = {
             today: {
                 "date": today,
@@ -324,7 +358,7 @@ def save_custom_food_record(name: str, score: float, rating: str, verdict: str, 
         "Rating": rating,
         "verdict": verdict,
         "flags": flags or {},
-        "created_at": datetime.now().isoformat()
+        "created_at": now_local().isoformat()
     }
 
     # 1. Update custom_foods.json
@@ -916,7 +950,7 @@ def suggestions(q: Optional[str] = Query(None)):
 @app.get("/api/logs")
 def get_day_log(date_query: Optional[str] = Query(None, alias="date"), x_user_email: Optional[str] = Header(None)):
     """Returns the food log, total day score, and water hydration summary for a specific date (defaults to today)."""
-    target_date = date_query.strip() if date_query else datetime.now().strftime("%Y-%m-%d")
+    target_date = date_query.strip() if date_query else now_local().strftime("%Y-%m-%d")
     all_logs = load_food_logs(x_user_email)
     day_data = all_logs.get(target_date, {})
     items = day_data.get("items", [])
@@ -965,13 +999,13 @@ def add_food_log(req: AddFoodRequest, x_user_email: Optional[str] = Header(None)
     if not food_name:
         raise HTTPException(400, "Food name cannot be empty.")
     
-    target_date = req.date.strip() if req.date else datetime.now().strftime("%Y-%m-%d")
+    target_date = req.date.strip() if req.date else now_local().strftime("%Y-%m-%d")
     
     # If user provided custom flags for unknown food, use custom scoring
     if req.custom_flags:
         s = score_from_flags(req.custom_flags)
         r = rating_label(s)
-        current_time = datetime.now().strftime("%I:%M %p")
+        current_time = now_local().strftime("%I:%M %p")
         v = "Not good choice. High in liquid sugar, empty calories, artificial additives and carbonation." if req.custom_flags.get("Sugary_drink") else verdict_text(r, s)
         new_item = {
             "id": f"item-{int(time.time() * 1000)}",
@@ -996,7 +1030,7 @@ def add_food_log(req: AddFoodRequest, x_user_email: Optional[str] = Header(None)
     else:
         # Score from dataset or ML fallback
         score_res = score_one(ScoreRequest(name=food_name))
-        current_time = datetime.now().strftime("%I:%M %p")
+        current_time = now_local().strftime("%I:%M %p")
         new_item = {
             "id": f"item-{int(time.time() * 1000)}",
             "name": score_res.name,
@@ -1009,7 +1043,7 @@ def add_food_log(req: AddFoodRequest, x_user_email: Optional[str] = Header(None)
     
     all_logs = load_food_logs(x_user_email)
     if target_date not in all_logs:
-        dt = datetime.strptime(target_date, "%Y-%m-%d") if target_date else datetime.now()
+        dt = datetime.strptime(target_date, "%Y-%m-%d") if target_date else now_local()
         all_logs[target_date] = {
             "date": target_date,
             "day": dt.strftime("%A"),
@@ -1028,7 +1062,7 @@ def add_food_log(req: AddFoodRequest, x_user_email: Optional[str] = Header(None)
 @app.delete("/api/logs/{item_id}")
 def delete_food_log(item_id: str, date_query: Optional[str] = Query(None, alias="date"), x_user_email: Optional[str] = Header(None)):
     """Removes a food item from the dataset and recalculates day score."""
-    target_date = date_query.strip() if date_query else datetime.now().strftime("%Y-%m-%d")
+    target_date = date_query.strip() if date_query else now_local().strftime("%Y-%m-%d")
     all_logs = load_food_logs(x_user_email)
     if target_date in all_logs:
         items = all_logs[target_date].get("items", [])
@@ -1053,7 +1087,7 @@ class UpdateWaterTargetRequest(BaseModel):
 @app.get("/api/water")
 def get_water_log(date_query: Optional[str] = Query(None, alias="date"), x_user_email: Optional[str] = Header(None)):
     """Returns the water log and hydration progress for a specific date (defaults to today)."""
-    target_date = date_query.strip() if date_query else datetime.now().strftime("%Y-%m-%d")
+    target_date = date_query.strip() if date_query else now_local().strftime("%Y-%m-%d")
     all_logs = load_water_logs(x_user_email)
     day_record = all_logs.get(target_date, {})
     return compute_water_day_summary(target_date, day_record)
@@ -1061,8 +1095,8 @@ def get_water_log(date_query: Optional[str] = Query(None, alias="date"), x_user_
 @app.post("/api/water")
 def add_water_entry(req: AddWaterRequest, x_user_email: Optional[str] = Header(None)):
     """Adds a glass or bottle of water drank, updating daily hydration total."""
-    target_date = req.date.strip() if req.date else datetime.now().strftime("%Y-%m-%d")
-    current_time = datetime.now().strftime("%I:%M %p")
+    target_date = req.date.strip() if req.date else now_local().strftime("%Y-%m-%d")
+    current_time = now_local().strftime("%I:%M %p")
     all_logs = load_water_logs(x_user_email)
 
     if target_date not in all_logs:
@@ -1091,7 +1125,7 @@ def add_water_entry(req: AddWaterRequest, x_user_email: Optional[str] = Header(N
 @app.delete("/api/water/{entry_id}")
 def delete_water_entry(entry_id: str, date_query: Optional[str] = Query(None, alias="date"), x_user_email: Optional[str] = Header(None)):
     """Deletes a water entry and recalculates daily hydration progress."""
-    target_date = date_query.strip() if date_query else datetime.now().strftime("%Y-%m-%d")
+    target_date = date_query.strip() if date_query else now_local().strftime("%Y-%m-%d")
     all_logs = load_water_logs(x_user_email)
 
     if target_date in all_logs:
@@ -1106,7 +1140,7 @@ def delete_water_entry(entry_id: str, date_query: Optional[str] = Query(None, al
 @app.put("/api/water/target")
 def update_water_target(req: UpdateWaterTargetRequest, x_user_email: Optional[str] = Header(None)):
     """Updates the daily water intake target in ml."""
-    target_date = req.date.strip() if req.date else datetime.now().strftime("%Y-%m-%d")
+    target_date = req.date.strip() if req.date else now_local().strftime("%Y-%m-%d")
     all_logs = load_water_logs(x_user_email)
 
     if target_date not in all_logs:
@@ -1131,7 +1165,7 @@ class PlanRequest(BaseModel):
 @app.get("/api/plan")
 def get_plan(date_query: Optional[str] = Query(None, alias="date"), x_user_email: Optional[str] = Header(None)):
     """Returns the user's written plan for a date (defaults to today)."""
-    target_date = date_query.strip() if date_query else datetime.now().strftime("%Y-%m-%d")
+    target_date = date_query.strip() if date_query else now_local().strftime("%Y-%m-%d")
     return {"date": target_date, "text": load_plan(x_user_email, target_date)}
 
 @app.put("/api/plan")
@@ -1194,7 +1228,7 @@ def _longest_run(date_set) -> int:
 def _build_tasks(date_str: str, food_logs: dict, water_logs: dict, plans: dict) -> list:
     """Six tasks for one day: two fixed, four picked from a pool (same picks for everyone that day)."""
     day_dt = datetime.strptime(date_str, "%Y-%m-%d")
-    now = datetime.now()
+    now = now_local()
     is_past = date_str < now.strftime("%Y-%m-%d")
     is_today = date_str == now.strftime("%Y-%m-%d")
     now_min = now.hour * 60 + now.minute
@@ -1361,6 +1395,8 @@ def compute_pet_bundle(email: Optional[str], target_date: str) -> dict:
             "next_stage": next_stage["name"] if next_stage else None,
             "next_stage_at": next_stage["min_good_days"] if next_stage else None,
             "clean_streak": current_streak,
+            "best_clean_streak": best_clean,
+            "today_clean": target_date in clean_dates,
             "fed": [{"name": i.get("name"), "score": i.get("score"), "rating": i.get("rating"),
                      "time": i.get("time"), "bad": _is_bad_item(i)} for i in today["items"]],
         },
@@ -1378,7 +1414,7 @@ def compute_pet_bundle(email: Optional[str], target_date: str) -> dict:
 @app.get("/api/pet")
 def get_pet(date_query: Optional[str] = Query(None, alias="date"), x_user_email: Optional[str] = Header(None)):
     """Pet state, daily tasks and badges for the signed-in user."""
-    target_date = date_query.strip() if date_query else datetime.now().strftime("%Y-%m-%d")
+    target_date = date_query.strip() if date_query else now_local().strftime("%Y-%m-%d")
     try:
         datetime.strptime(target_date, "%Y-%m-%d")
     except ValueError:
@@ -1388,7 +1424,7 @@ def get_pet(date_query: Optional[str] = Query(None, alias="date"), x_user_email:
 @app.get("/api/profile/{user_id}")
 def get_public_profile(user_id: str, date_query: Optional[str] = Query(None, alias="date")):
     """Public card for one athlete (opened from the leaderboard): today's food, water, pet and badges."""
-    target_date = date_query.strip() if date_query else datetime.now().strftime("%Y-%m-%d")
+    target_date = date_query.strip() if date_query else now_local().strftime("%Y-%m-%d")
     try:
         datetime.strptime(target_date, "%Y-%m-%d")
     except ValueError:
@@ -1487,7 +1523,7 @@ def compute_user_today_stats(user: dict, target_date: Optional[str] = None) -> d
     - Synergy Bonus (+500 pts): awarded if diet >= 70 and water >= 100%
     """
     if not target_date:
-        target_date = datetime.now().strftime("%Y-%m-%d")
+        target_date = now_local().strftime("%Y-%m-%d")
 
     food_logs = load_food_logs(user.get("email"))
     water_logs = load_water_logs(user.get("email"))
@@ -1622,7 +1658,7 @@ def register_user(req: RegisterRequest):
         "height": float(req.height),
         "weight": float(req.weight),
         "photo": req.photo,
-        "created_at": datetime.now().isoformat(),
+        "created_at": now_local().isoformat(),
     }
 
     users[user_id] = new_user
@@ -1721,7 +1757,7 @@ def get_leaderboard(
     Returns today's leaderboard rankings calculated strictly from actual meals and water intake.
     No hardcoded demo athletes are added.
     """
-    target_date = date_query.strip() if date_query else datetime.now().strftime("%Y-%m-%d")
+    target_date = date_query.strip() if date_query else now_local().strftime("%Y-%m-%d")
     users = load_users()
     current_email = (email or x_user_email or "").strip().lower()
 

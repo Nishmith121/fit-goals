@@ -13,5 +13,7 @@ export function apiFetch(url, options = {}) {
   const email = currentUserEmail();
   const headers = { ...(options.headers || {}) };
   if (email) headers['X-User-Email'] = email;
+  // Minutes east of UTC (IST = 330), so the server stamps entries in the user's local time.
+  headers['X-TZ-Offset'] = String(-new Date().getTimezoneOffset());
   return fetch(url, { ...options, headers });
 }

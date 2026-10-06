@@ -12,7 +12,12 @@ export const MOOD_LABEL = {
 const STAGE_SCALE = [0.76, 0.87, 0.98, 1.06];
 
 // A golden retriever puppy, shaded with gradients and fur strokes.
-// Mood drives the face and motion; sick and passed-out states are tinted with a CSS filter.
+// Mood drives the pose, face and motion:
+//   happy  - sits up, jumps, flaps its ears and plays with a ball
+//   okay   - sits calmly, wags, blinks
+//   hungry - sits and keeps looking at the bowl
+//   sick   - lies down with its chin on its paws, sad eyes, then dozes off
+//   dead   - fast asleep and unwell (worst day)
 export default function Dog({ mood = 'okay', stageIndex = 0, fed = false, showBowl = true }) {
   const uid = useId().replace(/[^a-zA-Z0-9]/g, '');
   const id = (name) => `${name}-${uid}`;
@@ -21,9 +26,10 @@ export default function Dog({ mood = 'okay', stageIndex = 0, fed = false, showBo
   const scale = STAGE_SCALE[Math.min(stageIndex, STAGE_SCALE.length - 1)];
   const collar = stageIndex >= 3 ? '#c9a13f' : '#b8423c';
   const line = { stroke: '#7a4a1c', strokeWidth: 1.1, strokeLinejoin: 'round', strokeLinecap: 'round', strokeOpacity: 0.75 };
+  const lying = mood === 'sick' || mood === 'dead';
   const sad = mood === 'sick' || mood === 'hungry';
   const eyesOpen = mood === 'happy' || mood === 'okay' || mood === 'hungry';
-  const lookDown = mood === 'hungry';
+  const lookDown = mood === 'hungry' || mood === 'sick';
 
   const Eye = ({ cx }) => (
     <g>
@@ -90,11 +96,48 @@ export default function Dog({ mood = 'okay', stageIndex = 0, fed = false, showBo
         </radialGradient>
       </defs>
 
-      <ellipse className="dog-shadow" cx="120" cy="212" rx={78 * scale} ry="10" fill={url('shadow')} />
+      <ellipse className="dog-shadow" cx={lying ? 112 : 120} cy="212" rx={(lying ? 98 : 78) * scale} ry="10" fill={url('shadow')} />
 
       <g transform={`translate(120 210) scale(${scale}) translate(-120 -210)`}>
         <g className="dog-tint">
           <g className="dog-all">
+            {lying && (
+              <g>
+                {/* tail resting on the ground */}
+                <g className="dog-tail">
+                  <path d="M54 197 C40 187 20 189 11 202 C22 210 40 211 58 208 Z" fill={url('ear')} {...line} />
+                  <g fill="none" stroke="#f1c377" strokeWidth="1.2" strokeLinecap="round" opacity="0.6">
+                    <path d="M24 198 q8 1 14 6" />
+                    <path d="M36 194 q8 2 12 8" />
+                  </g>
+                </g>
+                {/* curled-up body */}
+                <g className="dog-body">
+                  <path d="M46 208 C38 176 64 148 112 148 C152 148 178 170 180 208 Z" fill={url('body')} {...line} />
+                  <g fill="none" stroke="#a5661f" strokeWidth="1.3" strokeLinecap="round" opacity="0.45">
+                    <path d="M70 170 q-5 8 -6 18" />
+                    <path d="M84 160 q-4 8 -5 16" />
+                    <path d="M100 154 q-3 7 -3 14" />
+                  </g>
+                  {/* haunch */}
+                  <ellipse cx="68" cy="186" rx="26" ry="22" fill={url('body')} {...line} />
+                </g>
+                <ellipse cx="52" cy="205" rx="17" ry="6.5" fill={url('leg')} {...line} />
+                <g fill="none" stroke="#7a4a1c" strokeWidth="1.1" strokeLinecap="round" opacity="0.7">
+                  <path d="M44 203 q-1 4 0 6 M51 202 q-1 5 0 7" />
+                </g>
+                {/* front paws stretched out, the chin rests on them */}
+                <ellipse cx="108" cy="205" rx="18" ry="7.5" fill="#f6d79a" {...line} />
+                <ellipse cx="164" cy="205" rx="18" ry="7.5" fill="#f6d79a" {...line} />
+                <g fill="none" stroke="#7a4a1c" strokeWidth="1.2" strokeLinecap="round" opacity="0.8">
+                  <path d="M100 203 q1 4 0 7 M106 202 q1 5 0 8" />
+                  <path d="M172 203 q-1 4 0 7 M166 202 q-1 5 0 8" />
+                </g>
+              </g>
+            )}
+
+            {!lying && (
+              <g>
             {/* tail: feathered plume */}
             <g className="dog-tail">
               <path
@@ -137,6 +180,7 @@ export default function Dog({ mood = 'okay', stageIndex = 0, fed = false, showBo
             </g>
 
             {/* front legs */}
+            <g className="dog-flegs">
             <path d="M96 148 Q92 178 94 198 Q94 209 106 209 Q118 209 118 198 Q119 178 117 148 Z" fill={url('leg')} />
             <path d="M123 148 Q121 178 122 198 Q122 209 134 209 Q146 209 146 198 Q148 178 144 148 Z" fill={url('leg')} />
             <g fill="none" {...line}>
@@ -149,6 +193,8 @@ export default function Dog({ mood = 'okay', stageIndex = 0, fed = false, showBo
             <g fill="none" stroke="#7a4a1c" strokeWidth="1.2" strokeLinecap="round" opacity="0.8">
               <path d="M101 203 q1 4 0 7 M106 202 q1 5 0 8 M111 203 q1 4 0 7" />
               <path d="M129 203 q1 4 0 7 M134 202 q1 5 0 8 M139 203 q1 4 0 7" />
+            </g>
+
             </g>
 
             {/* chest ruff */}
@@ -164,7 +210,11 @@ export default function Dog({ mood = 'okay', stageIndex = 0, fed = false, showBo
               <path d="M126 132 q-2 10 -1 18" />
             </g>
 
-            {/* head */}
+              </g>
+            )}
+
+            {/* head (lowered onto the paws when lying) */}
+            <g transform={lying ? 'translate(16 74) rotate(-5 120 130)' : undefined}>
             <g className="dog-head">
               <g className="dog-ear dog-ear-l">
                 <path
@@ -209,10 +259,14 @@ export default function Dog({ mood = 'okay', stageIndex = 0, fed = false, showBo
                 <path d="M136 46 q3 5 4 10" />
               </g>
 
+              {!lying && (
+                <g>
               {/* collar */}
               <path d="M95 123 Q120 138 145 123 L145 131 Q120 146 95 131 Z" fill={collar} {...line} />
               <circle cx="120" cy="141" r="5.2" fill="#e9c75f" {...line} />
               <circle cx="118.6" cy="139.6" r="1.4" fill="rgba(255,255,255,0.7)" />
+                </g>
+              )}
 
               {/* muzzle */}
               <path
@@ -239,18 +293,27 @@ export default function Dog({ mood = 'okay', stageIndex = 0, fed = false, showBo
               )}
               {mood === 'sick' && (
                 <g>
-                  <g fill="none" stroke="#2a1a0f" strokeWidth="2.6" strokeLinecap="round">
+                  {/* awake but miserable: heavy lids, a tear */}
+                  <g className="dog-eyes-awake">
+                    <Eye cx={103} />
+                    <Eye cx={137} />
+                    <g fill="#e2a04a" stroke="#5a3513" strokeWidth="1.4" strokeLinejoin="round">
+                      <path d="M94.5 76 A8.5 8 0 0 1 111.5 76 Z" />
+                      <path d="M128.5 76 A8.5 8 0 0 1 145.5 76 Z" />
+                    </g>
+                    <path className="dog-tear dog-tear-l" d="M101 83 q5 9 0 12 q-5 -3 0 -12 z" fill="#8fd0f5" />
+                  </g>
+                  {/* dozing off */}
+                  <g className="dog-eyes-asleep" fill="none" stroke="#2a1a0f" strokeWidth="2.6" strokeLinecap="round">
                     <path d="M96 75 q7 6 14 0" />
                     <path d="M130 75 q7 6 14 0" />
                   </g>
-                  <path className="dog-tear dog-tear-l" d="M101 83 q5 9 0 12 q-5 -3 0 -12 z" fill="#8fd0f5" />
-                  <path className="dog-tear dog-tear-r" d="M139 83 q5 9 0 12 q-5 -3 0 -12 z" fill="#8fd0f5" />
                 </g>
               )}
               {mood === 'dead' && (
-                <g fill="none" stroke="#1a110b" strokeWidth="3" strokeLinecap="round">
-                  <path d="M97 69 l12 12 M109 69 l-12 12" />
-                  <path d="M131 69 l12 12 M143 69 l-12 12" />
+                <g fill="none" stroke="#2a1a0f" strokeWidth="2.6" strokeLinecap="round">
+                  <path d="M96 75 q7 6 14 0" />
+                  <path d="M130 75 q7 6 14 0" />
                 </g>
               )}
 
@@ -281,19 +344,17 @@ export default function Dog({ mood = 'okay', stageIndex = 0, fed = false, showBo
                   {mood === 'dead' && <path d="M107 109 Q120 105 133 109" />}
                 </g>
               )}
-              {mood === 'dead' && <path d="M123 108 q1 13 7 11 q4 -2 1 -11 z" fill={url('tongue')} />}
+            </g>
             </g>
           </g>
         </g>
 
-        {/* spirit that rises once the dog has passed out */}
-        {mood === 'dead' && (
-          <g className="dog-spirit" transform="translate(0 -12)">
-            <ellipse cx="66" cy="96" rx="17" ry="5" fill="none" stroke="#e8c96a" strokeWidth="3" />
-            <path
-              d="M54 132 q0 -18 12 -18 q12 0 12 18 q-4 -4 -6 0 q-3 -4 -6 0 q-3 -4 -6 0 q-2 -4 -6 0 z"
-              fill="rgba(255,255,255,0.28)"
-            />
+        {/* sleep marks while the dog is lying down */}
+        {lying && (
+          <g className="dog-zzz" fill="#cfd6e4" fontFamily="Outfit, sans-serif" fontWeight="800">
+            <text className="dog-z dog-z-1" x="186" y="112" fontSize="13">z</text>
+            <text className="dog-z dog-z-2" x="197" y="94" fontSize="17">z</text>
+            <text className="dog-z dog-z-3" x="210" y="72" fontSize="22">Z</text>
           </g>
         )}
       </g>
@@ -308,6 +369,14 @@ export default function Dog({ mood = 'okay', stageIndex = 0, fed = false, showBo
           ) : (
             <ellipse cx="228" cy="192" rx="19" ry="3.5" fill="#23262d" />
           )}
+        </g>
+      )}
+
+      {/* ball to play with when happy */}
+      {mood === 'happy' && (
+        <g className="dog-ball">
+          <circle cx="28" cy="202" r="10" fill="#cfe24a" stroke="#8a9a22" strokeWidth="1" />
+          <path d="M20 196 q8 6 4 14 M36 196 q-8 6 -4 14" fill="none" stroke="#f4f8d2" strokeWidth="1.6" strokeLinecap="round" />
         </g>
       )}
 

@@ -15,6 +15,8 @@ export default function PetPage({ onNavigate }) {
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
   const [replayKey, setReplayKey] = useState(0);
+  // lets you watch any mood's animation without changing today's real mood
+  const [previewMood, setPreviewMood] = useState(null);
 
   const load = useCallback(async () => {
     try {
@@ -47,6 +49,7 @@ export default function PetPage({ onNavigate }) {
   }
 
   const { pet, tasks, badges } = data;
+  const shownMood = previewMood || pet.mood;
   const healthColor =
     pet.health === null ? '#6b7180' : pet.health >= 70 ? '#10b981' : pet.health >= 45 ? '#f59e0b' : '#ef4444';
 
@@ -65,8 +68,22 @@ export default function PetPage({ onNavigate }) {
       <div className="pet-top-grid">
         {/* Pet card */}
         <section className="pet-card">
-          <div className={`pet-stage pet-stage-${pet.mood}`}>
-            <Dog key={replayKey} mood={pet.mood} stageIndex={pet.stage_index} fed={pet.fed.length > 0} />
+          <div className={`pet-stage pet-stage-${shownMood}`}>
+            <Dog key={`${replayKey}-${shownMood}`} mood={shownMood} stageIndex={pet.stage_index} fed={pet.fed.length > 0} />
+            <div className="pet-preview-row" role="group" aria-label="Preview a mood">
+              {Object.keys(MOOD_LABEL).map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  className={`pet-preview-chip${shownMood === m ? ' is-on' : ''}`}
+                  onClick={() => setPreviewMood(m === pet.mood ? null : m)}
+                  aria-pressed={shownMood === m}
+                  title={m === pet.mood ? "Today's mood" : `Preview: ${MOOD_LABEL[m]}`}
+                >
+                  {MOOD_LABEL[m]}
+                </button>
+              ))}
+            </div>
             <button
               type="button"
               className="pet-replay-btn"

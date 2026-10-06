@@ -129,6 +129,32 @@
 }
 .pet-replay-btn:hover { background: var(--pt-surface-2); color: var(--pt-text); }
 
+/* mood preview chips along the top of the dog's stage */
+.pet-stage { padding-top: 2.6rem; }
+.pet-preview-row {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.pet-preview-chip {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.38rem 0.55rem;
+  border-radius: 7px;
+  background: transparent;
+  border: 1px solid var(--pt-line);
+  color: var(--pt-text-3);
+  cursor: pointer;
+}
+.pet-preview-chip:hover { background: var(--pt-surface-2); color: var(--pt-text); }
+.pet-preview-chip.is-on { background: var(--pt-surface-2); border-color: var(--pt-line-strong); color: var(--pt-text); }
+
 /* ---------- Pet info ---------- */
 .pet-info { display: flex; flex-direction: column; gap: 0.85rem; }
 
